@@ -1,6 +1,6 @@
-# ColorCraft 🌈
+# ColorStrap 🌈
 
-**ColorCraft** é uma aplicação web projetada para desenvolvedores web e designers que buscam trabalhar com combinações de cores, identificar cores e converter valores de cores (RGB, HEX, HSL, CMYK). Com uma interface intuitiva, o ColorCraft oferece ferramentas úteis para quem trabalha com design e desenvolvimento.
+**ColorStrap** é uma aplicação web projetada para desenvolvedores web e designers que buscam trabalhar com combinações de cores, identificar cores e converter valores de cores (RGB, HEX, HSL, CMYK). Com uma interface intuitiva, o ColorStrap oferece ferramentas úteis para quem trabalha com design e desenvolvimento.
 
 ## 🛠️ Funcionalidades
 
@@ -18,7 +18,7 @@
 ## 📦 Estrutura do Projeto
 
 ```plaintext
-ColorCraft/
+ColorStrap/
 ├── css/
 │   └── style.css
 ├── js/
