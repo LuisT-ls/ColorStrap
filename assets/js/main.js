@@ -278,28 +278,80 @@ const gradientType = document.getElementById('gradientType')
 const gradientAngle = document.getElementById('gradientAngle')
 const gradientColor1 = document.getElementById('gradientColor1')
 const gradientColor2 = document.getElementById('gradientColor2')
+const addGradientColor = document.getElementById('addGradientColor')
+const gradientColorContainer = document.querySelector('.d-flex.gap-2.mb-2')
 
+let gradientColors = [gradientColor1, gradientColor2]
+
+// Função para criar novo input de cor
+const createColorInput = () => {
+  const input = document.createElement('input')
+  input.type = 'color'
+  input.className = 'form-control form-control-color'
+  input.value = getRandomColor()
+  return input
+}
+
+// Função para atualizar o output do ângulo
+const updateAngleOutput = () => {
+  const output = document.querySelector('output[for="gradientAngle"]')
+  output.textContent = `${gradientAngle.value}°`
+}
+
+// Função atualizada para gerar o gradiente
 const updateGradient = () => {
   const angle = gradientAngle.value
-  const color1 = gradientColor1.value
-  const color2 = gradientColor2.value
+  const colors = gradientColors.map(input => input.value).join(', ')
   let gradient = ''
 
   switch (gradientType.value) {
     case 'linear':
-      gradient = `linear-gradient(${angle}deg, ${color1}, ${color2})`
+      gradient = `linear-gradient(${angle}deg, ${colors})`
       break
     case 'radial':
-      gradient = `radial-gradient(circle, ${color1}, ${color2})`
+      gradient = `radial-gradient(circle, ${colors})`
       break
     case 'conic':
-      gradient = `conic-gradient(from ${angle}deg, ${color1}, ${color2})`
+      gradient = `conic-gradient(from ${angle}deg, ${colors})`
       break
   }
 
   gradientPreview.style.background = gradient
   gradientCode.textContent = gradient
+  updateAngleOutput()
 }
+
+// Event listener para adicionar nova cor
+addGradientColor.addEventListener('click', () => {
+  const newColorInput = createColorInput()
+
+  // Insere o novo input antes do botão de adicionar
+  gradientColorContainer.insertBefore(newColorInput, addGradientColor)
+
+  // Adiciona o novo input ao array de cores
+  gradientColors.push(newColorInput)
+
+  // Adiciona event listener para o novo input
+  newColorInput.addEventListener('input', updateGradient)
+
+  // Atualiza o gradiente
+  updateGradient()
+})
+
+// Adiciona event listener específico para a mudança do ângulo via scroll
+gradientAngle.addEventListener('wheel', e => {
+  e.preventDefault() // Previne o scroll da página
+
+  // Determina a direção do scroll
+  const direction = e.deltaY > 0 ? -1 : 1
+
+  // Atualiza o valor do ângulo
+  const currentValue = parseInt(gradientAngle.value)
+  const newValue = Math.max(0, Math.min(360, currentValue + direction * 5))
+
+  gradientAngle.value = newValue
+  updateGradient()
+})
 
 // Contrast Checker
 const foregroundColor = document.getElementById('foregroundColor')
@@ -408,6 +460,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateContrastChecker()
   updateGradient()
   renderSavedPalettes()
+  updateAngleOutput()
 
   // Initialize copy buttons
   document.querySelectorAll('.copy-btn').forEach(btn => {
@@ -433,7 +486,7 @@ colorMode.addEventListener('change', generatePalette)
 colorCount.addEventListener('input', generatePalette)
 
 // Event listeners for gradient generator
-;[gradientType, gradientAngle, gradientColor1, gradientColor2].forEach(el => {
+;[gradientType, gradientAngle, ...gradientColors].forEach(el => {
   el.addEventListener('input', updateGradient)
 })
 
