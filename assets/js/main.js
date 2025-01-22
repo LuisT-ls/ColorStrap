@@ -383,11 +383,18 @@ const updateContrastChecker = () => {
 const colorWheel = document.getElementById('colorWheel')
 const ctx = colorWheel.getContext('2d')
 
-const drawColorWheel = () => {
-  const centerX = colorWheel.width / 2
-  const centerY = colorWheel.height / 2
-  const radius = Math.min(centerX, centerY) - 10
+// Configuration
+const centerX = colorWheel.width / 2
+const centerY = colorWheel.height / 2
+const radius = Math.min(centerX, centerY) - 30
+let selectedHue = 0
+let activeHarmonies = []
 
+// Draw the color wheel
+function drawColorWheel() {
+  ctx.clearRect(0, 0, colorWheel.width, colorWheel.height)
+
+  // Draw the color wheel segments
   for (let angle = 0; angle < 360; angle++) {
     const startAngle = ((angle - 2) * Math.PI) / 180
     const endAngle = ((angle + 2) * Math.PI) / 180
@@ -406,14 +413,140 @@ const drawColorWheel = () => {
       radius
     )
 
-    const color = chroma.hsl(angle, 1, 0.5)
-    gradient.addColorStop(0, 'white')
-    gradient.addColorStop(0.5, color.hex())
+    const color = `hsl(${angle}, 100%, 50%)`
+    gradient.addColorStop(0.2, 'white')
+    gradient.addColorStop(0.7, color)
     gradient.addColorStop(1, 'black')
 
     ctx.fillStyle = gradient
     ctx.fill()
   }
+
+  // Draw selection marker
+  drawSelectionMarker()
+
+  // Draw harmony markers if active
+  if (activeHarmonies.length > 0) {
+    drawHarmonyMarkers()
+  }
+}
+
+// Draw the selection marker
+function drawSelectionMarker() {
+  const angle = (selectedHue * Math.PI) / 180
+  const x = centerX + Math.cos(angle) * radius
+  const y = centerY + Math.sin(angle) * radius
+
+  ctx.beginPath()
+  ctx.arc(x, y, 10, 0, Math.PI * 2)
+  ctx.strokeStyle = 'white'
+  ctx.lineWidth = 3
+  ctx.stroke()
+  ctx.fillStyle = `hsl(${selectedHue}, 100%, 50%)`
+  ctx.fill()
+}
+
+// Draw harmony markers
+function drawHarmonyMarkers() {
+  const harmonies = calculateHarmonies()
+  harmonies.forEach(hue => {
+    const angle = (hue * Math.PI) / 180
+    const x = centerX + Math.cos(angle) * radius
+    const y = centerY + Math.sin(angle) * radius
+
+    ctx.beginPath()
+    ctx.arc(x, y, 8, 0, Math.PI * 2)
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)'
+    ctx.lineWidth = 2
+    ctx.stroke()
+    ctx.fillStyle = `hsl(${hue}, 100%, 50%)`
+    ctx.fill()
+  })
+}
+
+// Calculate harmony angles based on selected hue
+function calculateHarmonies() {
+  const harmonies = []
+
+  if (activeHarmonies.includes('complementary')) {
+    harmonies.push((selectedHue + 180) % 360)
+  }
+
+  if (activeHarmonies.includes('triadic')) {
+    harmonies.push((selectedHue + 120) % 360)
+    harmonies.push((selectedHue + 240) % 360)
+  }
+
+  if (activeHarmonies.includes('tetradic')) {
+    harmonies.push((selectedHue + 90) % 360)
+    harmonies.push((selectedHue + 180) % 360)
+    harmonies.push((selectedHue + 270) % 360)
+  }
+
+  if (activeHarmonies.includes('analogous')) {
+    harmonies.push((selectedHue + 30 + 360) % 360)
+    harmonies.push((selectedHue - 30 + 360) % 360)
+  }
+
+  return harmonies
+}
+
+// Handle mouse events
+function handleMouseEvent(e) {
+  const rect = colorWheel.getBoundingClientRect()
+  const x = e.clientX - rect.left - centerX
+  const y = e.clientY - rect.top - centerY
+
+  // Calculate angle from center
+  let angle = (Math.atan2(y, x) * 180) / Math.PI
+  angle = (angle + 360) % 360
+
+  // Calculate distance from center
+  const distance = Math.sqrt(x * x + y * y)
+
+  // Only update if click is within the wheel radius
+  if (distance <= radius) {
+    selectedHue = Math.round(angle)
+    drawColorWheel()
+  }
+}
+
+// Initialize event listeners
+colorWheel.addEventListener('mousedown', handleMouseEvent)
+colorWheel.addEventListener('mousemove', e => {
+  if (e.buttons === 1) {
+    // Only update if mouse button is pressed
+    handleMouseEvent(e)
+  }
+})
+
+// Handle harmony buttons
+document
+  .getElementById('showComplementary')
+  .addEventListener('click', function () {
+    toggleHarmony('complementary')
+  })
+
+document.getElementById('showTriadic').addEventListener('click', function () {
+  toggleHarmony('triadic')
+})
+
+document.getElementById('showTetradic').addEventListener('click', function () {
+  toggleHarmony('tetradic')
+})
+
+document.getElementById('showAnalogous').addEventListener('click', function () {
+  toggleHarmony('analogous')
+})
+
+function toggleHarmony(harmony) {
+  const index = activeHarmonies.indexOf(harmony)
+  if (index === -1) {
+    activeHarmonies = [harmony] // Only show one harmony at a time
+  } else {
+    activeHarmonies = []
+  }
+  drawColorWheel()
 }
 
 // Color Vision Simulator
