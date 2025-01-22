@@ -451,6 +451,7 @@
               <div class="card-body">
                 <h3 class="card-title h5">Harmonias de Cores</h3>
                 <div class="accordion" id="colorHarmonies">
+                  <!-- Complementares -->
                   <div class="accordion-item">
                     <h4 class="accordion-header">
                       <button
@@ -480,6 +481,39 @@
                     </div>
                   </div>
 
+                  <!-- Split Complementares -->
+                  <div class="accordion-item">
+                    <h4 class="accordion-header">
+                      <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#splitComplementaryInfo"
+                      >
+                        Cores Split Complementares
+                      </button>
+                    </h4>
+                    <div
+                      id="splitComplementaryInfo"
+                      class="accordion-collapse collapse"
+                      data-bs-parent="#colorHarmonies"
+                    >
+                      <div class="accordion-body">
+                        <p>
+                          Uma cor base combinada com as duas cores adjacentes à
+                          sua complementar. Oferecem contraste suave e
+                          equilíbrio, mantendo a harmonia. Perfeito para designs
+                          menos intensos.
+                        </p>
+                        <div
+                          class="harmony-example"
+                          id="splitComplementaryExample"
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Análogos -->
                   <div class="accordion-item">
                     <h4 class="accordion-header">
                       <button
@@ -509,6 +543,7 @@
                     </div>
                   </div>
 
+                  <!-- Triadicas -->
                   <div class="accordion-item">
                     <h4 class="accordion-header">
                       <button
@@ -531,6 +566,64 @@
                           alto contraste mantendo harmonia e equilíbrio.
                         </p>
                         <div class="harmony-example" id="triadicExample"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Tetradicas -->
+                  <div class="accordion-item">
+                    <h4 class="accordion-header">
+                      <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#tetradicInfo"
+                      >
+                        Cores Tetrádicas
+                      </button>
+                    </h4>
+                    <div
+                      id="tetradicInfo"
+                      class="accordion-collapse collapse"
+                      data-bs-parent="#colorHarmonies"
+                    >
+                      <div class="accordion-body">
+                        <p>
+                          Quatro cores formadas por dois pares de cores
+                          complementares. Criam esquemas ricos e dinâmicos,
+                          oferecendo variedade e contraste. Ideal para designs
+                          ousados e vibrantes.
+                        </p>
+                        <div class="harmony-example" id="tetradicExample"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Monádicas -->
+                  <div class="accordion-item">
+                    <h4 class="accordion-header">
+                      <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#monadicInfo"
+                      >
+                        Cores Monádicas
+                      </button>
+                    </h4>
+                    <div
+                      id="monadicInfo"
+                      class="accordion-collapse collapse"
+                      data-bs-parent="#colorHarmonies"
+                    >
+                      <div class="accordion-body">
+                        <p>
+                          Baseiam-se em apenas uma cor e suas variações de tons,
+                          saturação e brilho. Criam designs minimalistas,
+                          elegantes e coesos. Ideais para transmitir
+                          simplicidade e sofisticação.
+                        </p>
+                        <div class="harmony-example" id="monadicExample"></div>
                       </div>
                     </div>
                   </div>
