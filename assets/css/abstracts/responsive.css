@@ -1,0 +1,88 @@
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  :root {
+    /* Dark theme variables */
+    --primary: #82b1ff;
+    --primary-dark: #2962ff;
+    --secondary: #90a4ae;
+    --success: #81c784;
+    --warning: #ffca28;
+    --danger: #e57373;
+    --info: #4fc3f7;
+    --body-bg: #121212;
+    --card-bg: #1e1e1e;
+    --text-primary: #ffffff;
+    --text-secondary: #b0bec5;
+  }
+
+  #themeSwitcher {
+    display: none;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .navbar {
+    padding: 0.5rem 0;
+  }
+
+  footer {
+    padding: 3rem 0 1.5rem;
+  }
+
+  .social-links {
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+  .copyright,
+  .footer-links {
+    text-align: center;
+  }
+
+  .footer-links a {
+    margin: 0 0.75rem;
+  }
+
+  .back-to-top {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 991px) {
+  .navbar > .container {
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar-brand {
+    margin-right: auto;
+  }
+
+  #themeSwitcher {
+    margin-right: 1rem;
+    order: 1;
+  }
+
+  .navbar-toggler {
+    order: 2;
+  }
+
+  .navbar-collapse {
+    order: 3;
+    width: 100%;
+  }
+
+  .ms-auto {
+    margin-left: 0 !important;
+  }
+}

@@ -1,0 +1,39 @@
+/* Dark Theme Variables */
+[data-theme='dark'] {
+  --primary: #82b1ff;
+  --primary-dark: #2962ff;
+  --secondary: #90a4ae;
+  --success: #81c784;
+  --warning: #ffca28;
+  --danger: #e57373;
+  --info: #4fc3f7;
+  --body-bg: #121212;
+  --card-bg: #1e1e1e;
+  --text-primary: #ffffff;
+  --text-secondary: #b0bec5;
+  --border-radius: 0.5rem;
+  --transition-speed: 0.3s;
+  --spacing-unit: 1rem;
+}
+
+[data-theme='dark'] .h5.mb-3,
+[data-theme='dark'] .card-title,
+[data-theme='dark'] .card {
+  color: var(--text-primary);
+}
+
+[data-theme='dark'] .card {
+  background-color: var(--card-bg);
+}
+
+[data-theme='dark'] #hexOutput,
+[data-theme='dark'] #rgbOutput,
+[data-theme='dark'] #hslOutput,
+[data-theme='dark'] #gradientCode,
+[data-theme='dark'] .d-block.text-center {
+  color: var(--text-secondary);
+}
+
+[data-theme='dark'] .text-muted {
+  color: var(--text-secondary) !important;
+}

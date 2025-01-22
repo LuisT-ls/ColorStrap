@@ -1,0 +1,25 @@
+/* Cards */
+.card {
+  background-color: var(--card-bg);
+  border: none;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform var(--transition-speed),
+    box-shadow var(--transition-speed);
+  margin-bottom: var(--spacing-unit);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+}

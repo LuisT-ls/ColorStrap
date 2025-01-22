@@ -1,0 +1,33 @@
+/* Import all modular CSS files */
+@import 'abstracts/variables.css';
+@import 'abstracts/animations.css';
+@import 'abstracts/responsive.css';
+
+@import 'base/reset.css';
+@import 'base/typography.css';
+@import 'base/accessibility.css';
+
+@import 'components/buttons.css';
+@import 'components/cards.css';
+@import 'components/forms.css';
+@import 'components/navbar.css';
+
+@import 'layout/footer.css';
+@import 'layout/grid.css';
+@import 'layout/header.css';
+
+@import 'themes/dark-theme.css';
+
+@import 'tools/color-palette.css';
+@import 'tools/color-psychology.css';
+@import 'tools/gradient-generator.css';
+@import 'tools/color-wheel.css';
+
+/* Global Styles */
+body {
+  background-color: var(--body-bg);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  transition: background-color var(--transition-speed);
+}

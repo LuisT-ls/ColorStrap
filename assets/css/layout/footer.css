@@ -1,0 +1,196 @@
+/* Footer base styles */
+footer {
+  background: linear-gradient(to right, var(--dark), #1a1f25);
+  color: var(--light);
+  padding: 4rem 0 2rem;
+  position: relative;
+  margin-top: 6rem;
+}
+
+/* Footer wave decoration */
+footer::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(
+    to right bottom,
+    transparent 49%,
+    var(--dark) 50%
+  );
+}
+
+/* Brand section */
+footer h5 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+footer h5 i {
+  color: var(--primary);
+}
+
+/* Description text */
+footer p {
+  color: #b0bec5;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+/* Social links */
+.social-links {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.social-links a {
+  color: var(--light);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.social-links a:hover {
+  background: var(--primary);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Quick links */
+.list-unstyled li {
+  margin-bottom: 0.75rem;
+}
+
+.list-unstyled a,
+.list-unstyled button {
+  color: #b0bec5;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+
+.list-unstyled a:hover,
+.list-unstyled button:hover {
+  color: var(--primary) !important;
+  transform: translateX(5px);
+}
+
+.list-unstyled i {
+  font-size: 0.75rem;
+  margin-right: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+/* Newsletter form */
+.newsletter-form .input-group {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem;
+  border-radius: 50px;
+}
+
+.newsletter-form .form-control {
+  background: transparent;
+  border: none;
+  color: var(--light);
+  padding: 0.75rem 1.5rem;
+}
+
+.newsletter-form .form-control::placeholder {
+  color: #b0bec5;
+}
+
+.newsletter-form .btn {
+  border-radius: 50px;
+  padding: 0.75rem 1.5rem;
+  background: var(--primary);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.newsletter-form .btn:hover {
+  background: var(--primary-dark);
+  transform: translateX(3px);
+}
+
+/* Divider */
+hr {
+  border-color: rgba(255, 255, 255, 0.1);
+  margin: 2rem 0;
+}
+
+/* Copyright section */
+.copyright {
+  color: #b0bec5;
+  font-size: 0.875rem;
+}
+
+/* Footer links */
+.footer-links a {
+  color: #b0bec5;
+  transition: color 0.3s ease;
+  margin-left: 1.5rem;
+  font-size: 0.875rem;
+}
+
+.footer-links a:hover {
+  color: var(--primary);
+}
+
+/* Back to top button */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--primary);
+  color: white;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--primary-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.back-to-top:active {
+  transform: translateY(-1px);
+}
+
+.back-to-top i {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.back-to-top:hover i {
+  transform: translateY(-2px);
+}

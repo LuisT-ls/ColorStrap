@@ -708,3 +708,33 @@ document.querySelectorAll('.color-swatch').forEach(swatch => {
     }
   })
 })
+
+// Back to top button functionality
+const backToTop = document.getElementById('backToTop')
+
+// Show/hide button based on scroll position
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) {
+    backToTop.classList.add('visible')
+  } else {
+    backToTop.classList.remove('visible')
+  }
+})
+
+// Smooth scroll to top
+backToTop.addEventListener('click', e => {
+  e.preventDefault()
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
+})
+
+// Add hover effect to button icon
+backToTop.addEventListener('mouseenter', () => {
+  backToTop.querySelector('i').style.transform = 'translateY(-2px)'
+})
+
+backToTop.addEventListener('mouseleave', () => {
+  backToTop.querySelector('i').style.transform = 'translateY(0)'
+})
