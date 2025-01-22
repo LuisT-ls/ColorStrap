@@ -431,6 +431,41 @@ function drawColorWheel() {
   }
 }
 
+// Função para criar blocos de cores em uma div
+function addColorBlocks(elementId, colors) {
+  const container = document.getElementById(elementId)
+
+  // Limpa qualquer conteúdo anterior
+  container.innerHTML = ''
+
+  // Cria blocos de cores para cada cor
+  colors.forEach(color => {
+    const block = document.createElement('div')
+    block.style.width = '50px'
+    block.style.height = '50px'
+    block.style.backgroundColor = color
+    block.style.margin = '5px'
+    block.style.display = 'inline-block'
+    block.title = color // Mostra o código da cor ao passar o mouse
+    container.appendChild(block)
+  })
+}
+
+// Exemplos de harmonias de cores
+const colorExamples = {
+  complementaryExample: ['#FF0000', '#00FF00'], // Vermelho e verde
+  splitComplementaryExample: ['#FF0000', '#FFFF00', '#00FFFF'], // Vermelho, amarelo e ciano
+  analogousExample: ['#FF0000', '#FF7F00', '#FFFF00'], // Vermelho, laranja e amarelo
+  triadicExample: ['#FF0000', '#00FF00', '#0000FF'], // Vermelho, verde e azul
+  tetradicExample: ['#FF0000', '#00FF00', '#FFFF00', '#0000FF'], // Vermelho, verde, amarelo e azul
+  monadicExample: ['#FF0000', '#FF4D4D', '#FF9999', '#FFCCCC'] // Tons de vermelho
+}
+
+// Adiciona os exemplos a cada div correspondente
+for (const [id, colors] of Object.entries(colorExamples)) {
+  addColorBlocks(id, colors)
+}
+
 // Draw the selection marker
 function drawSelectionMarker() {
   const angle = (selectedHue * Math.PI) / 180
