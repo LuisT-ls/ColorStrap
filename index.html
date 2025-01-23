@@ -174,53 +174,86 @@
         <div class="row">
           <!-- Conversor de Cores -->
           <div class="col-md-6 mb-4">
-            <article class="card h-100">
+            <article class="card color-converter h-100">
+              <div class="color-converter-header">
+                <h3 class="color-converter-title h5">
+                  <i class="fas fa-palette" aria-hidden="true"></i>
+                  Conversor de Cores
+                </h3>
+                <button
+                  class="btn btn-sm btn-outline-secondary"
+                  id="randomColorBtn"
+                >
+                  <i class="fas fa-random" aria-hidden="true"></i>
+                </button>
+              </div>
               <div class="card-body">
-                <h3 class="card-title h5">Conversor de Cores</h3>
                 <form id="colorConverter">
-                  <div class="mb-3">
-                    <label for="inputColor" class="form-label"
-                      >Cor de Entrada</label
-                    >
-                    <div class="input-group">
+                  <div class="color-input-group">
+                    <div class="color-picker-wrapper">
                       <input
                         type="color"
                         class="form-control form-control-color"
                         id="inputColor"
                       />
+                    </div>
+                    <div class="color-input-text flex-grow-1">
                       <input
                         type="text"
                         class="form-control"
+                        id="colorInputText"
                         placeholder="#FFFFFF ou rgb(255,255,255)"
                       />
+                      <button
+                        type="button"
+                        class="color-refresh-btn"
+                        id="colorRefreshBtn"
+                      >
+                        <i class="fas fa-sync-alt" aria-hidden="true"></i>
+                      </button>
                     </div>
                   </div>
-                  <div class="results">
-                    <div class="mb-2">
-                      <label>HEX:</label>
-                      <code id="hexOutput">#FFFFFF</code>
+                  <div class="color-results">
+                    <div class="color-result-item">
+                      <div class="color-sample" id="colorSample"></div>
+                      <div class="flex-grow-1">
+                        <span class="color-result-label">HEX:</span>
+                        <code id="hexOutput" class="color-result-value"
+                          >#FFFFFF</code
+                        >
+                      </div>
                       <button
-                        class="btn btn-sm btn-outline-secondary copy-btn"
+                        class="btn btn-sm color-copy-btn"
                         data-clipboard-target="#hexOutput"
                       >
                         <i class="fas fa-copy" aria-hidden="true"></i>
                       </button>
                     </div>
-                    <div class="mb-2">
-                      <label>RGB:</label>
-                      <code id="rgbOutput">rgb(255, 255, 255)</code>
+                    <div class="color-result-item">
+                      <div class="color-sample" id="rgbSample"></div>
+                      <div class="flex-grow-1">
+                        <span class="color-result-label">RGB:</span>
+                        <code id="rgbOutput" class="color-result-value"
+                          >rgb(255, 255, 255)</code
+                        >
+                      </div>
                       <button
-                        class="btn btn-sm btn-outline-secondary copy-btn"
+                        class="btn btn-sm color-copy-btn"
                         data-clipboard-target="#rgbOutput"
                       >
                         <i class="fas fa-copy" aria-hidden="true"></i>
                       </button>
                     </div>
-                    <div class="mb-2">
-                      <label>HSL:</label>
-                      <code id="hslOutput">hsl(0, 0%, 100%)</code>
+                    <div class="color-result-item">
+                      <div class="color-sample" id="hslSample"></div>
+                      <div class="flex-grow-1">
+                        <span class="color-result-label">HSL:</span>
+                        <code id="hslOutput" class="color-result-value"
+                          >hsl(0, 0%, 100%)</code
+                        >
+                      </div>
                       <button
-                        class="btn btn-sm btn-outline-secondary copy-btn"
+                        class="btn btn-sm color-copy-btn"
                         data-clipboard-target="#hslOutput"
                       >
                         <i class="fas fa-copy" aria-hidden="true"></i>
@@ -405,7 +438,10 @@
         <h2 id="theory-title" class="section-title">
           <i class="fas fa-book" aria-hidden="true"></i> Teoria das Cores
         </h2>
+
+        <!-- Color Wheel -->
         <div class="row">
+          <!-- Roda de Cores Interativa -->
           <div class="col-md-6 mb-4">
             <article class="card">
               <div class="card-body">
@@ -446,7 +482,8 @@
             </article>
           </div>
 
-          <div class="col-md-6 mb-4">
+          <!-- Harmonias de Cores -->
+          <div class="col-md-6 mb-4 color-harmonies">
             <article class="card">
               <div class="card-body">
                 <h3 class="card-title h5">Harmonias de Cores</h3>
@@ -633,6 +670,7 @@
           </div>
         </div>
 
+        <!-- Psicologia das Cores -->
         <div class="row">
           <div class="col-12 mb-4">
             <article class="card">
@@ -724,7 +762,7 @@
           </div>
 
           <div class="col-md-4">
-            <aside class="card mb-4">
+            <aside class="card mb-4 accessibility-tips">
               <div class="card-body">
                 <h3 class="card-title h5">Dicas de Acessibilidade</h3>
                 <ul class="list-group list-group-flush">

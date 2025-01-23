@@ -256,20 +256,200 @@ const restorePalette = palette => {
   showToast('Paleta restaurada!')
 }
 
-// Color Converter
-const inputColor = document.getElementById('inputColor')
-const hexOutput = document.getElementById('hexOutput')
-const rgbOutput = document.getElementById('rgbOutput')
-const hslOutput = document.getElementById('hslOutput')
+document.addEventListener('DOMContentLoaded', () => {
+  const colorPicker = document.getElementById('inputColor')
+  const colorInputText = document.getElementById('colorInputText')
+  const colorRefreshBtn = document.getElementById('colorRefreshBtn')
+  const randomColorBtn = document.getElementById('randomColorBtn')
 
-const updateColorOutputs = color => {
-  const chromaColor = chroma(color)
-  hexOutput.textContent = chromaColor.hex()
-  rgbOutput.textContent = chromaColor.css()
-  hslOutput.textContent = chromaColor.css('hsl')
-}
+  const hexOutput = document.getElementById('hexOutput')
+  const rgbOutput = document.getElementById('rgbOutput')
+  const hslOutput = document.getElementById('hslOutput')
 
-inputColor.addEventListener('input', e => updateColorOutputs(e.target.value))
+  const colorSample = document.getElementById('colorSample')
+  const rgbSample = document.getElementById('rgbSample')
+  const hslSample = document.getElementById('hslSample')
+
+  // Círculo principal para mostrar a cor selecionada
+  const mainColorCircle = document.querySelector(
+    '.color-input-group .color-picker-wrapper'
+  )
+
+  // Convert color formats
+  function hexToRgb(hex) {
+    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i
+    hex = hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b)
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+    return result
+      ? `rgb(${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(
+          result[3],
+          16
+        )})`
+      : null
+  }
+
+  function rgbToHsl(rgb) {
+    const [r, g, b] = rgb.match(/\d+/g).map(Number)
+    const rr = r / 255
+    const gg = g / 255
+    const bb = b / 255
+    const max = Math.max(rr, gg, bb)
+    const min = Math.min(rr, gg, bb)
+    let h,
+      s,
+      l = (max + min) / 2
+
+    if (max === min) {
+      h = s = 0
+    } else {
+      const d = max - min
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
+      h =
+        max === rr
+          ? (gg - bb) / d + (gg < bb ? 6 : 0)
+          : max === gg
+          ? (bb - rr) / d + 2
+          : (rr - gg) / d + 4
+      h /= 6
+    }
+
+    return `hsl(${Math.round(h * 360)}, ${Math.round(s * 100)}%, ${Math.round(
+      l * 100
+    )}%)`
+  }
+
+  // Função para validar e normalizar cor
+  function validateColor(color) {
+    const tempDiv = document.createElement('div')
+    tempDiv.style.color = color
+
+    try {
+      const computedColor = getComputedStyle(tempDiv).color
+      return computedColor !== 'rgb(0, 0, 0)'
+    } catch {
+      return false
+    }
+  }
+
+  // Função para converter para HEX
+  function colorToHex(color) {
+    const tempDiv = document.createElement('div')
+    tempDiv.style.color = color
+
+    const computedColor = getComputedStyle(tempDiv).color
+    const rgbMatch = computedColor.match(/\d+/g)
+
+    if (rgbMatch) {
+      return (
+        '#' +
+        rgbMatch
+          .map(x => {
+            const hex = parseInt(x).toString(16)
+            return hex.length === 1 ? '0' + hex : hex
+          })
+          .join('')
+      )
+    }
+
+    return null
+  }
+
+  // Update color outputs
+  function updateColorOutputs(color) {
+    const hex = color.startsWith('#') ? color : colorToHex(color)
+    const rgb = hexToRgb(hex)
+    const hsl = rgbToHsl(rgb)
+
+    if (hex && rgb && hsl) {
+      hexOutput.textContent = hex
+      rgbOutput.textContent = rgb
+      hslOutput.textContent = hsl
+
+      colorSample.style.backgroundColor = hex
+      rgbSample.style.backgroundColor = rgb
+      hslSample.style.backgroundColor = hsl
+
+      // Atualiza a cor do círculo principal
+      mainColorCircle.style.backgroundColor = hex
+      colorPicker.value = hex
+      colorInputText.value = hex
+    }
+  }
+
+  // Color picker change event
+  colorPicker.addEventListener('input', e => {
+    const color = e.target.value
+    updateColorOutputs(color)
+  })
+
+  // Color text input - validação em tempo real
+  colorInputText.addEventListener('input', e => {
+    const inputColor = e.target.value.trim()
+
+    if (validateColor(inputColor)) {
+      mainColorCircle.style.backgroundColor = inputColor
+    }
+  })
+
+  // Ao pressionar Enter
+  colorInputText.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      const inputColor = e.target.value.trim()
+
+      if (validateColor(inputColor)) {
+        updateColorOutputs(inputColor)
+      } else {
+        // Feedback visual para cor inválida
+        e.target.classList.add('is-invalid')
+        setTimeout(() => {
+          e.target.classList.remove('is-invalid')
+        }, 1000)
+      }
+    }
+  })
+
+  // Refresh color input
+  colorRefreshBtn.addEventListener('click', () => {
+    colorInputText.value = ''
+    colorInputText.focus()
+
+    // Reseta para branco
+    updateColorOutputs('#FFFFFF')
+  })
+
+  // Generate random color
+  randomColorBtn.addEventListener('click', () => {
+    const randomColor = `#${Math.floor(Math.random() * 16777215)
+      .toString(16)
+      .padStart(6, '0')}`
+    updateColorOutputs(randomColor)
+  })
+
+  // Copy functionality
+  const copyButtons = document.querySelectorAll('.color-copy-btn')
+  copyButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-clipboard-target')
+      const textToCopy = document.querySelector(targetId).textContent
+
+      navigator.clipboard
+        .writeText(textToCopy)
+        .then(() => {
+          btn.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i>'
+          setTimeout(() => {
+            btn.innerHTML = '<i class="fas fa-copy" aria-hidden="true"></i>'
+          }, 1000)
+        })
+        .catch(err => {
+          console.error('Falha ao copiar texto: ', err)
+        })
+    })
+  })
+
+  // Inicializa com branco
+  updateColorOutputs('#FFFFFF')
+})
 
 // Gradient Generator
 const gradientPreview = document.getElementById('gradientPreview')

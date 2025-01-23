@@ -1,18 +1,18 @@
 /* Base Variables */
 :root {
-  --primary: #007bff;
-  --primary-dark: #0056b3;
-  --secondary: #6c757d;
-  --success: #28a745;
-  --warning: #ffc107;
-  --danger: #dc3545;
-  --info: #17a2b8;
-  --dark: #343a40;
-  --light: #f8f9fa;
-  --body-bg: #f4f6f8;
-  --card-bg: #ffffff;
-  --text-primary: #212529;
-  --text-secondary: #6c757d;
+  --primary: #6c63ff;
+  --primary-dark: #4b49c6;
+  --secondary: #ff6584;
+  --success: #48c78e;
+  --warning: #ffa726;
+  --danger: #ff5252;
+  --info: #29b6f6;
+  --dark: #1c1c1c;
+  --light: #e3e8ef;
+  --body-bg: #dfe4ea;
+  --card-bg: #f4f4f9;
+  --text-primary: #2c3e50;
+  --text-secondary: #7f8c8d;
   --border-radius: 0.5rem;
   --transition-speed: 0.3s;
   --spacing-unit: 1rem;
