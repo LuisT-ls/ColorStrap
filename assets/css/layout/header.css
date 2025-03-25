@@ -69,6 +69,12 @@
   margin: 0 0.25rem;
 }
 
+.ms-2,
+.nav-link,
+.navbar-brand {
+  color: var(--light) !important;
+}
+
 .nav-link {
   display: flex;
   align-items: center;

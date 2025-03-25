@@ -1,6 +1,7 @@
 /* Dark Theme Variables */
 [data-theme='dark'] {
   --primary: #82b1ff;
+  --primary-medium: #388AFF;
   --primary-dark: #2962ff;
   --secondary: #90a4ae;
   --success: #81c784;
@@ -24,6 +25,20 @@
 
 [data-theme='dark'] .card {
   background-color: var(--card-bg);
+}
+
+[data-theme='dark'] .ms-2,
+.nav-link,
+.navbar-brand {
+  color: var(--text-primary);
+}
+
+[data-theme='dark'] .nav-link:hover {
+  background-color: var(--primary-medium);
+}
+
+[data-theme='dark'] .navbar {
+  background-color: var(--primary-dark);
 }
 
 [data-theme='dark'] #hexOutput,
