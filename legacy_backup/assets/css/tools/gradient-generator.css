@@ -1,6 +1,0 @@
-/* Gradient Generator */
-#gradientPreview {
-  border-radius: var(--border-radius);
-  margin-bottom: 1rem;
-  transition: background var(--transition-speed);
-}
